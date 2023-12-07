@@ -23,6 +23,23 @@ function PlantPage() {
     setSearchBar(e.target.value)
   }
 
+
+  function rmPlant(delPlant){
+    const rmPlant = plantDisplay.filter((plant) => plant.id !== delPlant.id)
+    setAllPlants(rmPlant)
+  }
+
+  function handleUpdatePrice(updatedPrice){
+    const updatedItem = allPlants.map((plant) => {
+      if(plant.id === updatedPrice.id){
+        return updatedPrice
+      } else {
+        return plant
+      }
+    })
+    setAllPlants(updatedItem)
+  }
+
   const plantDisplay = allPlants.filter((plants) => {
     if(searchBar==="") return true
 
@@ -34,7 +51,7 @@ function PlantPage() {
     <main>
       <NewPlantForm handleNewPlant={handleNewPlant}/>
       <Search handleChange={handleChange}/>
-      <PlantList plantDisplay={plantDisplay}/>
+      <PlantList plantDisplay={plantDisplay} rmPlant={rmPlant} handleUpdatePrice={handleUpdatePrice}/>
     </main>
   );
 }
